@@ -2,6 +2,7 @@ package com.zkyne.jobmanager.common.system;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * @ClassName: SpringContextHolder
@@ -9,6 +10,7 @@ import org.springframework.context.ApplicationContextAware;
  * @Author: zkyne
  * @Date: 2018/7/26 10:27
  */
+@Component
 public class SpringContextHolder implements ApplicationContextAware {
 	private static ApplicationContext applicationContext;
 
