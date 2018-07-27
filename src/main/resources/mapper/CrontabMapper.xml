@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zkyne.jobmanager.mapper.CrontabMapper">
+	<resultMap id="BaseResultMap" type="com.zkyne.jobmanager.po.Crontab">
+		<id column="job_id" property="jobId" jdbcType="VARCHAR" />
+		<result column="descript" property="descript" jdbcType="VARCHAR" />
+		<result column="performdate" property="performdate" jdbcType="TIMESTAMP" />
+		<result column="cron_exp" property="cronExp" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="SMALLINT" />
+	</resultMap>
+	<sql id="Base_Where">
+		<if test="jobId != null and jobId !=''"> and job_id= #{jobId}</if>
+		<if test="descript != null and descript !=''"> and descript= #{descript}</if>
+		<if test="performdate != null"> and performdate= #{performdate}</if>	
+		<if test="cronExp != null and cronExp !=''"> and cron_exp= #{cronExp}</if>
+		<if test="url != null and url !=''"> and url= #{url}</if>
+		<if test="status != null"> and status= #{status}</if>	
+	</sql>
+	<sql id="Base_Column_List">
+		job_id ,
+		descript ,
+		performdate ,
+		cron_exp ,
+		url ,
+		status 
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from crontab
+		where
+		job_id = #{jobId,jdbcType=VARCHAR}
+	</select>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from crontab
+		where
+		job_id = #{jobId,jdbcType=VARCHAR}
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.zkyne.jobmanager.po.Crontab">
+		insert into crontab
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="jobId != null and jobId !=''">job_id,</if>
+			<if test="descript != null and descript !=''">descript,</if>
+			<if test="performdate != null">performdate,</if>	
+			<if test="cronExp != null and cronExp !=''">cron_exp,</if>
+			<if test="url != null and url !=''">url,</if>
+			<if test="status != null">status,</if>	
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="jobId != null and jobId !=''">
+				#{jobId,jdbcType=VARCHAR},
+			</if>
+			<if test="descript != null and descript !=''">
+				#{descript,jdbcType=VARCHAR},
+			</if>
+			<if test="performdate != null">
+				#{performdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cronExp != null and cronExp !=''">
+				#{cronExp,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null and url !=''">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=SMALLINT},
+			</if>
+			
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.zkyne.jobmanager.po.Crontab">
+		update crontab
+		<set>
+			<if test="descript != null and descript !=''">
+				descript= #{descript,jdbcType=VARCHAR},
+			</if>
+			<if test="performdate != null">
+				performdate= #{performdate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cronExp != null and cronExp !=''">
+				cron_exp= #{cronExp,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null and url !=''">
+				url= #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				status= #{status,jdbcType=SMALLINT}
+			</if>
+		</set>
+		where
+		job_id = #{jobId,jdbcType=VARCHAR}
+	</update>
+
+	<select id="countByQueryVo" resultType="java.lang.Integer" parameterType="com.zkyne.jobmanager.vo.CrontabQueryVo">
+		select count(1) from crontab where 1=1
+		<if test="keyLike != null">
+			and descript like #{keyLike}
+		</if>
+	</select>
+	
+	<select id="selectByQueryVo" resultMap="BaseResultMap" parameterType="com.zkyne.jobmanager.vo.CrontabQueryVo">
+		select
+		<include refid="Base_Column_List" />
+		from crontab
+		where 1 = 1
+		<if test="keyLike != null">
+			and descript like #{keyLike}
+		</if>
+		<if test="startIndex != null">
+			limit #{startIndex},#{pageSize}
+		</if>
+	</select>
+	
+	<select id="findByJobUrl" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from crontab
+		where
+		url = #{jobUrl,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectAllEnableCrontab" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from crontab where status = 0
+	</select>
+
+</mapper>
