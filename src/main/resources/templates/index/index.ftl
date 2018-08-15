@@ -4,7 +4,7 @@
     <#include "../common/head.ftl">
     <title>定时任务调度管理系统</title>
 </head>
-<body style="background-color: #FCF9ED">
+<body style="background-image:url('/images/bodybg.png');background-position: left top;background-size: auto;background-repeat: repeat;background-attachment: scroll">
 <div class="container">
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
