@@ -9,11 +9,14 @@ public class CookieUtil {
 
     public static String getCookie(HttpServletRequest request, String key) {
         Cookie[] cookies = request.getCookies();
-        if (cookies == null || cookies.length == 0)
+        if (cookies == null || cookies.length == 0){
             return null;
-        for (int i = 0; i < cookies.length; i++) {
-            if (cookies[i].getName().equals(key))
-                return cookies[i].getValue();
+        }
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(key)) {
+                return cookie.getValue();
+
+            }
 
         }
         return null;
@@ -33,8 +36,9 @@ public class CookieUtil {
         checkDomainNotNull(domain);
 
         final Cookie[] cookies = request.getCookies();
-        if (cookies == null)
+        if (cookies == null){
             return false;
+        }
         int delCount = 0;
         for (final Cookie cookie : cookies) {
             final String name = cookie.getName();
@@ -49,9 +53,7 @@ public class CookieUtil {
                 }
             }
         }
-        if (delCount == keys.length)
-            return true;
-        return false;
+        return delCount == keys.length;
     }
 
     /**
@@ -63,15 +65,17 @@ public class CookieUtil {
      * @param domain
      * @return
      */
-    public static boolean setPersistentCookie(final HttpServletResponse response, //
+    public static boolean setPersistentCookie(final HttpServletResponse response,
                                               final String key, final String value, final String domain) {
         checkDomainNotNull(domain);
 
         try {
             final Cookie cookie = new Cookie(key, value);
-            cookie.setPath("/");// very important
+            // very important
+            cookie.setPath("/");
             cookie.setDomain(domain);
-            cookie.setMaxAge(-1); // -1: persist , not set: session, value: seconds
+            // -1: persist , not set: session, value: seconds
+            cookie.setMaxAge(-1);
             response.addCookie(cookie);
             return true;
         } catch (final Exception e) {
@@ -88,13 +92,14 @@ public class CookieUtil {
      * @param domain
      * @return
      */
-    public static boolean setSessionCookie(final HttpServletResponse response, //
+    public static boolean setSessionCookie(final HttpServletResponse response,
                                            final String key, final String value, final String domain) {
         checkDomainNotNull(domain);
 
         try {
             final Cookie cookie = new Cookie(key, value);
-            cookie.setPath("/");// very important
+            // very important
+            cookie.setPath("/");
             cookie.setDomain(domain);
             //cookie.setMaxAge(-1);
             response.addCookie(cookie);
@@ -114,21 +119,23 @@ public class CookieUtil {
      * @param expiry in seconds
      * @return
      */
-    public static boolean setExpiryCookie(final HttpServletResponse response, //
+    public static boolean setExpiryCookie(final HttpServletResponse response,
                                           final String key, final String value, final String domain, final int expiry) {
         checkDomainNotNull(domain);
 
         final Cookie cookie = new Cookie(key, value);
-        cookie.setPath("/");// very important
-        cookie.setDomain(domain.toString());
+        // very important
+        cookie.setPath("/");
+        cookie.setDomain(domain);
         cookie.setMaxAge(expiry);
         response.addCookie(cookie);
         return true;
     }
 
     private static void checkDomainNotNull(final String domain) {
-        if (DataUtil.isEmpty(domain))
+        if (DataUtil.isEmpty(domain)){
             throw new IllegalArgumentException("cookie domain is null!");
+        }
     }
 
     /**
@@ -138,20 +145,21 @@ public class CookieUtil {
       @param request
       @return
      */
-    public static final String getDomain(HttpServletRequest request) {
+    public static String getDomain(HttpServletRequest request) {
         String url = request.getServerName();
         return getDomain(url);
     }
 
-    public static final String getDomain(String url) {
+    public static String getDomain(String url) {
         url = url.replace("http://", "");
         if (url.contains("/")) {
             url = url.substring(0, url.indexOf("/"));
         }
         String[] str = url.split("\\.");
         int len = str.length;
-        if (len > 2)
+        if (len > 2){
             return str[len - 2] + "." + str[len - 1];
+        }
         return url;
     }
 

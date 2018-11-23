@@ -11,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @author zkyne
+ */
 @Component
 public class SecurityInterceptor implements HandlerInterceptor {
 
@@ -27,13 +30,13 @@ public class SecurityInterceptor implements HandlerInterceptor {
             httpServletResponse.sendRedirect("/login");
             return false;
         }
-        return currentUserId > 0;
+        return true;
     }
 
     private void dealUserToken(HttpServletRequest httpServletRequest) {
         long userId = 0L;
         Object attribute = httpServletRequest.getSession().getAttribute(Constants.SYS_USER_INFO_STORED_IN_SESSION);
-        if (attribute != null && attribute instanceof SysUser) {
+        if (attribute instanceof SysUser) {
             SysUser sysUser = (SysUser) attribute;
             userId = sysUser.getUserId();
         }

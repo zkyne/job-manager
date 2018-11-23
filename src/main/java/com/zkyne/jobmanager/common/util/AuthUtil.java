@@ -4,19 +4,19 @@ package com.zkyne.jobmanager.common.util;
  * 登录相关
  */
 public class AuthUtil {
-    private final static ThreadLocal<Long> currentUserId = new ThreadLocal<>();
+    private final static ThreadLocal<Long> CURRENTUSERID = new ThreadLocal<>();
 
     public static void addCurrentUserId(long userId) {
-        currentUserId.set(userId);
+        CURRENTUSERID.set(userId);
     }
 
     public static long getCurrentUserId() {
-        Long userId = currentUserId.get();
+        Long userId = CURRENTUSERID.get();
         return userId != null ? userId : 0;
     }
 
     public static void clear() {
-        currentUserId.remove();
+        CURRENTUSERID.remove();
     }
 
     private AuthUtil(){}

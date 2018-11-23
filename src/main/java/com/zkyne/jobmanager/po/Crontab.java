@@ -23,7 +23,6 @@ public class Crontab implements Serializable {
 
     private static final long serialVersionUID = 8878517545785711887L;
 
-    //列信息
     private String jobId;
 
     private String descript;

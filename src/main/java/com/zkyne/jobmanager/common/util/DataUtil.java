@@ -6,7 +6,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class DataUtil {
+/**
+ * @author zkyne
+ */
+public class DataUtil {
     private DataUtil(){}
 
     public static final String EMPTY = "";
@@ -19,8 +22,9 @@ public abstract class DataUtil {
      */
     public static boolean isEmpty(String... str) {
         for (String s : str) {
-            if (isEmpty(s))
+            if (isEmpty(s)){
                 return true;
+            }
         }
         return false;
     }
@@ -47,8 +51,9 @@ public abstract class DataUtil {
     }
 
     public static <T> String join(Collection<T> list, final String separator) {
-        if (isEmpty(list))
+        if (isEmpty(list)){
             return EMPTY;
+        }
         StringBuilder sb = new StringBuilder();
         for (T e : list) {
             sb.append(separator).append(e);
@@ -79,8 +84,9 @@ public abstract class DataUtil {
     }
 
     public static int toInt(String str) {
-        if (isEmpty(str))
+        if (isEmpty(str)){
             return 0;
+        }
         try {
             return Integer.parseInt(str.trim());
         } catch (Exception e) {
@@ -125,7 +131,7 @@ public abstract class DataUtil {
      * @param f
      * @return
      */
-    public final static String composeKey(String hyphen, Object... f) {
+    public static String composeKey(String hyphen, Object... f) {
         StringBuilder a = new StringBuilder();
         a.append(f[0]);
         for (int i = 1; i < f.length; i++) {
@@ -141,7 +147,7 @@ public abstract class DataUtil {
      * <a href="http://my.oschina.net/u/556800" class="referer" target="_blank">@return</a> 
      */
     public static String firstLetterToUpper(String str) {
-        Character c = Character.toUpperCase(str.charAt(0));
-        return c.toString().concat(str.substring(1));
+        char c = Character.toUpperCase(str.charAt(0));
+        return Character.toString(c).concat(str.substring(1));
     }
 }

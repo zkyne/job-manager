@@ -49,7 +49,7 @@ public class JobManager {
         sched.deleteJob(jobKey);
     }
 
-    public static void PauseJob(String name) throws SchedulerException {
+    public static void pauseJob(String name) throws SchedulerException {
         Scheduler sched = sf.getScheduler();
         JobKey jobKey = new JobKey(name);
         sched.pauseJob(jobKey);

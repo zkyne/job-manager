@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * SysUser Manager.
+ * @author zkyne
  */
 @Service
 public class SysUserServiceImpl implements ISysUserService {

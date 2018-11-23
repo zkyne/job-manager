@@ -23,7 +23,6 @@ public class SysUser implements Serializable{
     public static final int ONLINE_STATUS = 2;
 
     private static final long serialVersionUID = 8715041364243768711L;
-    //列信息
     private Long userId;
 
     private String userName;

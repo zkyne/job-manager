@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 @Scope
 @Aspect
 public class LogAspect {
-    //层切点
+    /**层切点*/
     @Pointcut("@annotation(com.zkyne.jobmanager.aspect.LogHandle)")
     public void logAspect() {
     }
@@ -33,10 +33,12 @@ public class LogAspect {
     @Before("logAspect()")
     public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = requestAttributes.getRequest();
-        Signature signature = joinPoint.getSignature();
-        log.info("访问接口URL={},访问类_方法={},访问参数Arsg={}", request.getRequestURL(),
-                signature.getDeclaringTypeName() + "." + signature.getName(),joinPoint.getArgs());
+        if(requestAttributes != null){
+            HttpServletRequest request = requestAttributes.getRequest();
+            Signature signature = joinPoint.getSignature();
+            log.info("访问接口URL={},访问类_方法={},访问参数Arsg={}", request.getRequestURL(),
+                    signature.getDeclaringTypeName() + "." + signature.getName(),joinPoint.getArgs());
+        }
     }
 
     @AfterReturning(returning = "object",pointcut = "logAspect()")

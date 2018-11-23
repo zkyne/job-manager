@@ -6,6 +6,9 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
+/**
+ * @author zkyne
+ */
 @WebListener
 public class SessionListener implements HttpSessionAttributeListener {
 

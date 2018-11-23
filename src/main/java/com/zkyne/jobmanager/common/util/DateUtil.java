@@ -15,7 +15,7 @@ public class DateUtil {
     public static final long MINUTE = 60000;
     public static final long HOUR = 60 * MINUTE;
     public static final long DAY = 24 * HOUR;
-    // yyyy-MM-dd hh:mm:ss 小写12小时制   yyyy-MM-dd HH:mm:ss  大写H，24小时制
+    /** yyyy-MM-dd hh:mm:ss 小写12小时制   yyyy-MM-dd HH:mm:ss  大写H，24小时制*/
     public final static String DEFAULT_PATTERN = "yyyyMMdd";
 
     public final static String F24_PATTERN = "yyyy-MM-dd HH:mm:ss";

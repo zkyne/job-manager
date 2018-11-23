@@ -7,7 +7,9 @@ package com.zkyne.jobmanager.common.enums;
  * @Date: 2018/7/17 18:20
  */
 public enum CodeEnum {
+    // 成功
     CODE_SUCCESS(1, "SUCCESS!"),
+    // 失败
     CODE_FAILURE(0, "FAILURE!");
     private int code;
     private String message;

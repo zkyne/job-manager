@@ -40,8 +40,9 @@ public class AppUtil{
     public static boolean isEn() {
         boolean flag = false;
         Object isEn = getSession().getAttribute("isEn");
-        if (isEn != null)
+        if (isEn != null){
             flag = Boolean.parseBoolean(isEn.toString());
+        }
         return flag;
     }
 

@@ -43,19 +43,20 @@ public class JobController {
     @RequestMapping("query")
     public String query(@RequestParam("key") String key, @RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,
                             @RequestParam(value = "pageSize",defaultValue = "10") Integer pageSize, Model model) throws Exception {
-        if(StringUtils.isNotBlank(key))
+        if(StringUtils.isNotBlank(key)){
             key = URLDecoder.decode(key, "UTF-8");
-
-        if(pageNo == null || pageNo < 1)
+        }
+        if(pageNo == null || pageNo < 1){
             pageNo = 1;
-
-        if(pageSize == null || pageSize < 1 || pageSize > 10)
+        }
+        if(pageSize == null || pageSize < 1 || pageSize > 10){
             pageSize = 10;
-
+        }
         Page<Crontab> page = crontabService.selectByPage(pageNo,pageSize,key);
         Map<String,String> query = Maps.newHashMap();
-        if(StringUtils.isNotBlank(key))
+        if(StringUtils.isNotBlank(key)){
             key = URLEncoder.encode(key,"UTF-8");
+        }
         query.put("key",key);
         page.setUri("/job/query");
         page.setQuery(query);
