@@ -18,7 +18,6 @@ public class JobManager {
             sf = new StdSchedulerFactory();
             Scheduler sched = sf.getScheduler();
             sched.start();
-            log.info("正在初始化调度系统.....");
         } catch (Exception e) {
             log.error("调度系统初始化异常....", e);
         }
