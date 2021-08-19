@@ -20,8 +20,8 @@ public enum CodeEnum {
     }
 
     public static CodeEnum getByCode(int code) {
-        CodeEnum[] arr$ = values();
-        for (CodeEnum codeEnum : arr$) {
+        CodeEnum[] arr = values();
+        for (CodeEnum codeEnum : arr) {
             if (codeEnum.code == code) {
                 return codeEnum;
             }

@@ -31,7 +31,7 @@ public class StartJobListener{
          try {
 				createSitemap();			
 			} catch (ParseException | SchedulerException e) {
-			 log.error("任务调度系统初始化异常.....{}",e);
+			 log.error("任务调度系统初始化异常.....{}",e.getMessage(), e);
 			}
         }
     }

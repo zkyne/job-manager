@@ -31,11 +31,11 @@ public class ExceptionHandle {
                 JobManagerException croException = (JobManagerException) e;
                 return ResultUtils.error(croException.getErrorCode(),croException.getMessage());
             }else{
-                log.error("服务器系统异常:{}",e);
+                log.error("服务器系统异常:{}",e.getMessage(), e);
                 return ResultUtils.error(-1,"系统异常");
             }
         }else{
-            log.error("服务器系统异常:{}",e);
+            log.error("服务器系统异常:{}",e.getMessage(), e);
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("error/500");
             return modelAndView;
